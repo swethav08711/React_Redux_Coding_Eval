@@ -11,11 +11,11 @@ export const Login = () => {
       <br />
       <TextField id="standard-basic" label="Password" />
       <br />
-      <NavLink to="/" className={style.button_btn}>
-        <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary">
+        <NavLink to="/" className={style.button_btn}>
           Login
-        </Button>
-      </NavLink>
+        </NavLink>
+      </Button>
     </div>
   )
 }

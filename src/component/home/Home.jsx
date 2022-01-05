@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from "react"
 import TextField from "@material-ui/core/TextField"
-import { useFetch } from "../../hook/CustomHook"
+
 import SearchResults from "./SearchResults"
 import style from "./input.module.css"
 import Pagination from "./Pagination"
 export const Home = () => {
   const [query, setQuery] = useState("")
-
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
+  const [error, setError] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(5)
-  const { loading, data } = useFetch(
-    `https://api.github.com/search/users?q=${query || "masai"}`
-  )
+
+  useEffect(() => {
+    fetch(`https://api.github.com/search/users?q=${query || "masai"}`)
+      .then(res => res.json())
+      .then(res => {
+        setData(res)
+        setLoading(false)
+      })
+      .catch(err => {
+        setError(true)
+        setLoading(false)
+      })
+  }, [])
   console.log(data.items)
-  const indexOfLastPost = currentPage * postsPerPage
-  const indexOfFirstPost = indexOfLastPost - postsPerPage
-  const currentPost = data.items.slice(indexOfFirstPost, indexOfLastPost)
+  // const indexOfLastPost = currentPage * postsPerPage
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage
+  // const currentPost = data.items.slice(indexOfFirstPost, indexOfLastPost)
   const paginate = pageNumber => setCurrentPage(pageNumber)
   return (
     <>
@@ -30,13 +42,13 @@ export const Home = () => {
       </div>
       {loading && "LOADING"}
       {!loading &&
-        currentPost &&
-        currentPost.map(item => <SearchResults data={item} />)}
-      <Pagination
+        data &&
+        data.items.map(item => <SearchResults data={item} />)}
+      {/* <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data.items.length}
         paginate={paginate}
-      />
+      /> */}
     </>
   )
 }

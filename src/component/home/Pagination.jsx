@@ -8,7 +8,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   }
 
   return (
-    <nav>
+    <nav style={{ display: "flex" }}>
       <ul>
         {pageNumbers.map(number => (
           <li key={number} className="page-item">
