@@ -28,9 +28,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchResults({ data }) {
   const classes = useStyles()
-
   return (
-    <div className={classes.root}>
+    <div className={classes.root} key={data.id}>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>

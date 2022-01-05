@@ -17,7 +17,7 @@ export function useFetch(url) {
   // data
   // error
   const [loading, setLoading] = useState(true)
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([])
   const [error, setError] = useState(false)
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export function useFetch(url) {
         setLoading(false)
       })
   }, [url])
+  console.log(data.items)
 
   return {
     loading,
