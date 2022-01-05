@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import TextField from "@material-ui/core/TextField"
 import { useFetch } from "../../hook/CustomHook"
 import SearchResults from "./SearchResults"
-
+import style from "./input.module.css"
 export const Home = () => {
   const [query, setQuery] = useState("")
   const [page, setPage] = useState(1)
@@ -11,7 +11,7 @@ export const Home = () => {
   )
   return (
     <>
-      <div>
+      <div className={style.inputField}>
         <TextField
           style={{ width: "20%" }}
           label="Search input"
