@@ -1,7 +1,13 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import TextField from "@material-ui/core/TextField"
-import Button from "@material-ui/core/Button"
+import { useFetch } from "../../hook/CustomHook"
+
 export const Home = () => {
+  const [query, setQuery] = useState("")
+  const [page, setPage] = useState(1)
+  const { loading, data } = useFetch(
+    `https://api.github.com/search/users?q=${query || "masai"}&&page=${page}`
+  )
   return (
     <>
       <div>
@@ -10,16 +16,13 @@ export const Home = () => {
           label="Search input"
           margin="normal"
           variant="outlined"
+          onChange={e => setQuery(e.target.value)}
         />
-        <Button
-          style={{ marginTop: "23px", marginLeft: "10px" }}
-          variant="contained"
-          color="primary"
-          href="#contained-buttons"
-        >
-          Link
-        </Button>
       </div>
+      {loading && "LOADING"}
+      {!loading &&
+        data &&
+        data.items.map(item => <div key={item.id}> {item.login} </div>)}
     </>
   )
 }
