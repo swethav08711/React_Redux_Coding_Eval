@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import TextField from "@material-ui/core/TextField"
 import { useFetch } from "../../hook/CustomHook"
+import SearchResults from "./SearchResults"
 
 export const Home = () => {
   const [query, setQuery] = useState("")
@@ -22,7 +23,7 @@ export const Home = () => {
       {loading && "LOADING"}
       {!loading &&
         data &&
-        data.items.map(item => <div key={item.id}> {item.login} </div>)}
+        data.items.map(item => <SearchResults data={item} />)}
     </>
   )
 }
