@@ -1,0 +1,13 @@
+.login_page {
+  background-color: #cfe8fc;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  margin: auto;
+}
+.button_btn {
+  text-decoration: none;
+}
